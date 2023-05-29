@@ -17,11 +17,12 @@
 
 .app__navbar-logo {
   display: flex;
+
   justify-content: flex-start;
   align-items: center;
 
   img {
-    width: 90px;
+    width: 110px;
     height: 20px;
 
     @media screen and (min-width: 2000px) {
