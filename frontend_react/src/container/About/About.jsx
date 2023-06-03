@@ -41,4 +41,4 @@ const About = () => {
   );
 };
 
-export default AppWrap(About, "about", "app__bgWhite");
+export default AppWrap(About, "about", "app__whitebg");
