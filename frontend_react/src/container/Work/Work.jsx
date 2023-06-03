@@ -15,6 +15,16 @@ const Work = () => {
 
   const handleWorkFilter = (item) => {
     setActiveFilter(item);
+    setAnimateCard({ y: 100, opacity: 0 });
+
+    setTimeout(() => {
+      setAnimateCard({ y: 0, opacity: 1 });
+      if (activeFilter === "All") {
+        setFilterWork(works);
+      } else {
+        setFilterWork(works.filter((work) => work.tags.includes(item)));
+      }
+    }, 500);
   };
 
   useEffect(() => {
@@ -29,6 +39,7 @@ const Work = () => {
       <h2 className="head-text">
         My Creative <span>Portfolio</span> Section
       </h2>
+
       <div className="app__work-filter">
         {["UI/UX", "Web App", "Mobile App", "React Js", "All"].map(
           (item, index) => (
