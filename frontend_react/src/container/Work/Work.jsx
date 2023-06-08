@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AiFillEye, AiFillGithub } from "react-icons/ai";
-import { easeInOut, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { AppWrap } from "../../wrapper";
 import { urlFor, client } from "../../client";
@@ -34,6 +34,7 @@ const Work = () => {
       setFilterWork(data);
     });
   }, []);
+
   return (
     <>
       <h2 className="head-text">
@@ -69,7 +70,7 @@ const Work = () => {
                 whileHover={{ opacity: [0, 1] }}
                 transition={{
                   duration: 0.25,
-                  ease: easeInOut,
+                  ease: "easeInOut",
                   staggerChildren: 0.5,
                 }}
                 className="app__work-hover app__flex"
