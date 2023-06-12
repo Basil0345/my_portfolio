@@ -31,24 +31,19 @@ const Testimonial = () => {
     });
   }, []);
 
+  const testi = testimonials[currentIndex];
+
   return (
     <>
       {testimonials.length && (
         <>
           <div className="app__testimonial-item app__flex">
-            <img
-              src={urlFor(testimonials[currentIndex]?.imgurl)}
-              alt={testimonials[currentIndex]?.name}
-            />
+            <img src={urlFor(testi?.imgurl)} alt={testi?.name} />
             <div className="app__testimonial-content">
-              <p className="p-text">{testimonials[currentIndex]?.feedback}</p>
+              <p className="p-text">{testi?.feedback}</p>
               <div>
-                <h4 className="bold-text">
-                  {testimonials[currentIndex]?.name}
-                </h4>
-                <h5 className="p-text">
-                  {testimonials[currentIndex]?.company}
-                </h5>
+                <h4 className="bold-text">{testi?.name}</h4>
+                <h5 className="p-text">{testi?.company}</h5>
               </div>
             </div>
           </div>
@@ -79,8 +74,14 @@ const Testimonial = () => {
           </div>
 
           <div className="app__testimonials-brand app__flex">
-            {brands.map(() => (
-              <motion.div></motion.div>
+            {brands.map((brand) => (
+              <motion.div
+                whileInView={{ opacity: [0, 1] }}
+                transition={{ duration: 0.5, type: "tween" }}
+                key={brand._id}
+              >
+                <img src={urlFor(brand.imgUrl)} alt={brand.name} />
+              </motion.div>
             ))}
           </div>
         </>
