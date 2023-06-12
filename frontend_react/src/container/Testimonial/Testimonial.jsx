@@ -23,7 +23,6 @@ const Testimonial = () => {
 
     client.fetch(query).then((data) => {
       setTestimonials(data);
-      console.log(data);
     });
 
     client.fetch(brandsQuery).then((data) => {
@@ -73,7 +72,7 @@ const Testimonial = () => {
             </div>
           </div>
 
-          <div className="app__testimonials-brand app__flex">
+          <div className="app__testimonial-brands app__flex">
             {brands.map((brand) => (
               <motion.div
                 whileInView={{ opacity: [0, 1] }}
