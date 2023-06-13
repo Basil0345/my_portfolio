@@ -110,3 +110,12 @@
     margin: 1rem 0;
   }
 }
+
+.text-danger {
+  color: red;
+  font-family: var(--font-base);
+  width: 100%;
+  font-size: 0.8rem;
+  text-align: left;
+  line-height: 1.5;
+}

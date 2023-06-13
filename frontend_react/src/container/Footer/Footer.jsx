@@ -15,6 +15,7 @@ const Footer = () => {
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
 
   const { name, email, message } = formData;
 
@@ -24,19 +25,36 @@ const Footer = () => {
   };
 
   const handleSubmit = () => {
-    setLoading(true);
+    const errors = {};
+    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    const contact = {
-      _type: "contact",
-      name: name,
-      email: email,
-      message: message,
-    };
+    if (!name) {
+      errors.name = "Name is required";
+    }
+    if (!email) {
+      errors.email = "Email is required";
+    } else if (!regex.test(email)) {
+      errors.email = " This is not a valid email format";
+    }
+    if (!message) {
+      errors.message = "Message is required";
+    }
 
-    client.create(contact).then(() => {
-      setLoading(false);
-      setIsFormSubmitted("true");
-    });
+    setFormErrors(errors);
+
+    if (Object.keys(errors).length == 0) {
+      setLoading(true);
+      const contact = {
+        _type: "contact",
+        name: name,
+        email: email,
+        message: message,
+      };
+      client.create(contact).then(() => {
+        setLoading(false);
+        setIsFormSubmitted("true");
+      });
+    }
   };
 
   return (
@@ -71,6 +89,7 @@ const Footer = () => {
               onChange={handleChangeInput}
             />
           </div>
+          <p className="text-danger">{formErrors.name}</p>
           <div className="app__flex">
             <input
               className="p-text"
@@ -81,6 +100,7 @@ const Footer = () => {
               onChange={handleChangeInput}
             />
           </div>
+          <p className="text-danger">{formErrors.email}</p>
           <div>
             <textarea
               className="p-text"
@@ -90,6 +110,7 @@ const Footer = () => {
               onChange={handleChangeInput}
             />
           </div>
+          <p className="text-danger">{formErrors.message}</p>
           <button type="button" className="p-text" onClick={handleSubmit}>
             {loading ? "sending" : "Send Message"}
           </button>
